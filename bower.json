@@ -18,7 +18,7 @@
     "twigjs"
   ],
   "dependencies":{
-      "requirejs":"~2.0",
+      "requirejs":"~2.1",
       "underscore":">=1.0",
       "twig.js":"~0.7.2",
       "requirejs-plugins":"~1.0.x"
