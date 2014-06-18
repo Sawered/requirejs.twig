@@ -1,10 +1,11 @@
 {
   "name": "requirejs.twig",
   "main": "requirejs.twig.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/Mctigger/requirejs.twig",
   "authors": [
-    "Tim Joseph <tim@mctigger.com>"
+    "Tim Joseph <tim@mctigger.com>",
+    "Sawered <sawered@gmail.com>"
   ],
   "description": "A require.js plugin to load twig.js render functions",
   "keywords": [
@@ -16,6 +17,12 @@
     "requirejs",
     "twigjs"
   ],
+  "dependencies":{
+      "requirejs":"~2.0",
+      "underscore":">=1.0",
+      "twig.js":"~0.7.2",
+      "requirejs-plugins":"~1.0.x"
+  },
   "license": "MIT",
   "ignore": [
     "**/.*",
