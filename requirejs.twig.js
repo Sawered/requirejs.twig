@@ -31,12 +31,15 @@ define(['text', 'twig', 'underscore'], function(text, Twig, _) {
                 else {
                     // Create the twigjs template
                     var template = Twig.twig({
-                        data: data
+                        id: name,
+                        data: data,
+                        allowInlineIncludes: true
+
                     });
                     // Bind the render function to its template
-                    var render = _.bind(template.render, template);
-                    // Return the bound function
-                    onLoad(render);
+                    template.renderer = _.bind(template.render, template);
+                    // Return tempalate itself,as it may need for reuse
+                    onLoad(template);
                 }
             });
 
@@ -50,7 +53,7 @@ define(['text', 'twig', 'underscore'], function(text, Twig, _) {
                 var content = buildMap[moduleName];
                 var template = Twig.twig({
                     data: content,
-                    id:name
+                    id: name
                 });
 
                 var compiled = template.compile({
@@ -58,7 +61,7 @@ define(['text', 'twig', 'underscore'], function(text, Twig, _) {
                 //    module:'amd', //we not use twigjs amd export, as we need add dependencies
                 });
 
-               var amd_define =  'define("'+name+'",["twig","underscore"], function (Twig,_) {\n\tvar twig, template;\ntwig = Twig.twig;\ntemplate = ' + compiled + ';\n\t var render = _.bind(template.render, template);\n\t return render;\n});';
+               var amd_define =  'define("'+name+'",["twig","underscore"], function (Twig,_) {\n\tvar twig, template;\ntwig = Twig.twig;\ntemplate = ' + compiled + ';\n\t template.renderer = _.bind(template.render, template); \n\t  return template;\n});';
                write(amd_define);
             }
         }
